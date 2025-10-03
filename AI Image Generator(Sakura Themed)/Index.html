@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Image Generator</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="favicon" href="C:\Users\vanda\OneDrive\Desktop\Ai Image generator\favicon_io.zip" type="image/x-icon">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1> Sakura AI Image Generator</h1>
+            <p style="font-weight: normal;">Create Stunning images using AI technology</p>
+        </div>
+
+        <div class="generator-section">
+            <div class="input-group">
+                <label for="prompt">Enter your image description</label>
+                <textarea class="prompt-input" id="prompt"
+                    placeholder="Describe the image you want to generate.."></textarea>
+            </div>
+
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="style1">Art Style</label>
+                    <select id="style1" class="control-input">
+                        <option value="realistic">realistic</option>
+                        <option value="artistic">artistic</option>
+                        <option value="cartoon">cartoon</option>
+                        <option value="abstract">abstract</option>
+                        <option value="cyberpunk">cyberpunk</option>
+                        <option value="vintage">vintage</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="resolution">Resolution</label>
+                    <select id="resolution" class="control-input">
+                        <option value="5012x5012">5012x5012</option>
+                        <option value="768x768">768x768</option>
+                        <option value="1024x1024">1024x1024</option>
+                        <option value="1536x1024">1536x1024</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="quality">Quality</label>
+                    <select id="quality" class="control-input">
+                        <option value="Standard">Standard</option>
+                        <option value="High">High</option>
+                        <option value="Ultra">Ultra</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="count">Number of images</label>
+                    <select id="count" class="control-input">
+                        <option value="1">1 Image</option>
+                        <option value="2">2 Images</option>
+                        <option value="3">3 Images</option>
+                        <option value="4">4 Images</option>
+                    </select>
+                </div>
+
+                <button class="generate-btn" id="generation">
+                    <span class="loading-spinner"></span>
+                    <span class="btn-text">Generate Images</span>
+                </button>
+            </div>
+        </div>
+
+        <div class=" result-section">
+            <div class="results-header">
+                <h2>Generated Images</h2>
+            </div>
+            <div id="results">
+                <div class="placeholder">
+                    <img src="imageicon3-removebg-preview.png" alt="Sample Image" />
+                    <p>Your generated images will appear here</p>
+                    <p style="font-size: 0.8rem; margin-top: 0.5rem;">
+                        Enter a prompt above and click "Generate Image" to get started
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="image-container" style="position: relative; overflow: hidden;">
+        <img src=" " alt="Generated Image: ${prompt}"
+            style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px 8px 0 0; transition: 0.3s ease;"
+            onload="this.style.opacity='1'"
+            onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>Failed to generate image</div>'"
+            loading="lazy" />
+        <div class="image-overlay"
+            style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); opacity: 0; transition: 0.3s ease; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem;">
+            Click to view full size.
+        </div>
+    </div>
+
+
+    <div class="image-info">
+        <div class="image-prompt">
+            ${prompt}
+        </div>
+        <div class="image-details">
+            <span>${resolution}</span>
+            <span>${style}</span>
+            <span>${quality}</span>
+        </div>
+        <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem;">
+            <button onclick="downloadImage(`${imageUrl}`, `${prompt.substring(0,30)}`)" style="flex: 1; padding: 0.5rem;
+                background: #4a9eff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 0.8rem;">
+                Download
+            </button>
+            <button onclick="openImageModel(`${imageUrl}`, `${prompt}`)" style="flex: 1; padding: 0.5rem;
+                background: #333;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 0.8rem;">
+                View full
+            </button>
+        </div>
+    </div>
+    <div style="max-width: 90%; max-height: 90%; position: relative;">
+        <img src=" " style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;">
+        <div
+            style="position: absolute; top: -40px; left: 0; right: 0; text-align: center; color: white; font-size: 0.9rem;">
+            "${prompt}"
+        </div>
+        <button onclick="this.parentElement.parentElement.remove()"
+            style="position: absolute; top: -40px; right: 0; background: #ff4444; color: white; border: none; 
+                                   border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 1.2rem;">×
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
